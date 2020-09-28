@@ -1,4 +1,4 @@
-# 📚 Core Markup <WIP>
+# 📚 Core Markup (WIP)
 
 #### About
 
