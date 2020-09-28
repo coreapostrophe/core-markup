@@ -49,7 +49,7 @@ For regular questions with multiple details. Any one of those details are random
 It is possible to host questions inside details. This type of nesting is made possible to accommodate supplementary information inside questions that could also be dissected into more details. The syntax is the same for every level of nesting except that they are added after the dash tag and is incremented accordingly.
 
 ```
--Question
+$Question
 -*Concept
 --Concept Detail
 --Concept Detail
