@@ -16,3 +16,6 @@ class ModuleManager:
 
     def getModules(self):
         return self.list
+
+    def getModule(self, name: str)->Module:
+        return self.list[name]

@@ -1,5 +1,6 @@
 from enum import Enum
 from lib.ModuleManager import ModuleManager
+from lib.StudyManager import StudyManager
 
 class Menu:
     def __init__(self):
@@ -14,7 +15,7 @@ class Menu:
             if self.userInput.lower() in moduleName.lower():
                 self.currentSelection = moduleName
         if self.currentSelection is not None:
-            print("Studying ... ")       # initializes study manager for the existing input
+            _ = StudyManager(self.moduleManager.getModule(self.currentSelection))
         else:
             print("Input is not within the choices")
 
