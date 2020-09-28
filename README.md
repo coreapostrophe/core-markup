@@ -11,7 +11,7 @@ Core markup is a simple custom noting markup that aims to automate quizzing meth
 Headers are defined by hashtags **"#"** like in common markdown. These simply organizes the questions so that the user could easily pinpoint the context of where they're from. This aims to resolve the confusion of multiple modules having the same question/terminology.
 
 ```
-# Science		-> Header 1
+# Science		  -> Header 1
 ## Biology		-> Header 2
 ### Genetics	-> Header 3
 
@@ -24,7 +24,7 @@ Questions are simply defined by adding an asterisk **"*"** at the beginning of a
 
 ```
 *Regular Concept
--Detail					-> is asked first
+-Detail					      -> is asked first
 
 $Enumerable Concept		-> is asked first
 -Detail
