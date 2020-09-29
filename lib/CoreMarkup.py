@@ -38,3 +38,6 @@ class CoreMarkup:
             elif lines[i][0] not in ["","\n","-"]:
                 masterList.append(lines[i])
         return masterList
+
+    def getQuestions(self):
+        return self.questions

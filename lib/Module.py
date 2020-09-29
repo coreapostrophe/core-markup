@@ -13,3 +13,6 @@ class Module:
 
     def getFile(self):
         return self.file
+
+    def getCoreMarkup(self)->CoreMarkup:
+        return self.markup
