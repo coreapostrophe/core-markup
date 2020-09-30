@@ -3,6 +3,7 @@ from lib.Study import Study
 from lib.Module import Module
 from lib.CoreMarkup import CoreMarkup
 from lib.ModuleManager import ModuleManager
+from lib.Environment import Environment
 
 class StudyManager:
     def __init__(self):
@@ -22,7 +23,7 @@ class StudyManager:
             print("Input is not within the choices")
 
     def printMenu(self):
-        print("Menu".center(50,"="))
+        print("Menu".center(Environment.ui_width,"="))
         for moduleName in self.moduleManager.getModules():
-            print(moduleName.center(50))
-        print("="*50)
+            print(moduleName.center(Environment.ui_width))
+        print("="*Environment.ui_width)

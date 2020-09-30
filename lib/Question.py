@@ -7,8 +7,9 @@ class Question:
         self.headers : Headers
         self.details = []
 
-    def isEnumerable(self, value: bool):
-        self.enumerable = value
+    def isEnumerable(self, *args):
+        self.enumerable = args[0]
+        return self.enumerable
     
     def addDetail(self, detail:str):
         self.details.append(detail)
