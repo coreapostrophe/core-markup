@@ -11,11 +11,11 @@ class Study:
         self.questions = module.getCoreMarkup().getQuestions()
         self.weights = [Environment.max_probability_weight]*len(self.questions)
         self.isStudying = True
-        self.render
+        self.render()
 
     def render(self):
         while(self.isStudying):
-            questionIndex = random.choices(range(0,len(self.questions)-1), weights=self.weights, k=1)[0]
+            questionIndex = random.choices(range(0,len(self.questions)), weights=self.weights, k=1)[0]
             print("="*Environment.ui_width)
             self.printQuestion(self.questions[questionIndex])
             print("="*Environment.ui_width)
@@ -23,20 +23,18 @@ class Study:
             print("R - Remembered | F - Forgotten | Q - Quit")
             userInput = input(": ")
 
-            if userInput.lower() == "r":
-                if(self.weights[questionIndex] != 1):
-                    self.weights[questionIndex] -= 1
+            if userInput.lower() in ["r",""]:
+                self.weights[questionIndex] -= 1
             elif userInput.lower() == "q":
                 self.isStudying = False
-            if(self.weights==[1]*self.questions.length):
+            if(self.weights==[0]*len(self.questions)):
                 print("Finished Studying!")
                 self.isStudying = False
-            break
 
     def printQuestion(self, question: Question):
-        main_concept = self.wrapper.wrap(text=question.getMainConcept)
+        main_concept = self.wrapper.wrap(text=question.getMainConcept())
         details = []
-        for detail in question.getDetails:
+        for detail in question.getDetails():
             if(isinstance(detail,str)):
                 details.append(self.wrapper.wrap(text=detail))
                 continue
@@ -56,12 +54,13 @@ class Study:
                     self.printQuestion(detail)
 
         else:
-            selectedDetail = None
-            while(not isinstance(selectedDetail,list)):
-                selectedDetail = random.choice(details)
+            selectedDetail = random.choice(details)
 
             print("Question:")
-            self.printWrappedString(self.printWrappedString(selectedDetail))
+            if(isinstance(selectedDetail,list)):
+                self.printWrappedString(selectedDetail)
+            elif(isinstance(selectedDetail,Question)):
+                self.printQuestion(selectedDetail)
             
             input("Press enter to continue".center(Environment.ui_width))
             
@@ -69,7 +68,5 @@ class Study:
             self.printWrappedString(main_concept)
 
     def printWrappedString(self, stringList: list):
-        print()
         for string in stringList:
             print(string)
-        print()

@@ -30,7 +30,7 @@ class CoreMarkup:
                     question.isEnumerable(True)
                 for j in range(i+1, len(lines)):
                     if lines[j][0] == "-":
-                        details.append(lines[j][1:-2])
+                        details.append(lines[j][1:])
                     else:
                         break
                 question.setDetails(self.transcribe(details))

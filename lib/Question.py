@@ -8,7 +8,8 @@ class Question:
         self.details = []
 
     def isEnumerable(self, *args):
-        self.enumerable = args[0]
+        if args != ():
+            self.enumerable = args[0]
         return self.enumerable
     
     def addDetail(self, detail:str):
