@@ -1,6 +1,6 @@
 # 📚 Core Markup
 
-![Core Markup Cover](C:\Users\Renea\Documents\GitHub\core-markup\github-sm-previews_core-markup.png)
+![Core Markup Cover](https://github.com/daverencordero/core-markup/blob/master/github-sm-previews_core-markup.png?raw=true)
 
 #### About
 
