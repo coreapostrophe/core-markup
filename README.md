@@ -1,5 +1,7 @@
 # 📚 Core Markup
 
+![Core Markup Cover](C:\Users\Renea\Documents\GitHub\core-markup\github-sm-previews_core-markup.png)
+
 #### About
 
 Core markup is a simple custom noting markup that aims to automate quizzing methods by parsing plain text into questions. These listed questions have their respective details and header tree which could then be utilized by quizzing apps for studying.
