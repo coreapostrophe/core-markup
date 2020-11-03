@@ -1,7 +1,3 @@
-function on_button_click(){
-    console.log("apple kiddy".length)
-}
-
 class CoreMarkup{
     constructor(lines){
         this.lines = lines
