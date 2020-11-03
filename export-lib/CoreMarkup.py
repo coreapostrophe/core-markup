@@ -1,10 +1,12 @@
 class CoreMarkup:
-    def __init__(self, file):
-        self.file = file
-        self.lines = file.readlines()
+    # CORE MARKUP 2019 「CoreApostrophe」
+    # The lines attribute corresponds to every line in the text file
+    def __init__(self, lines: list):
+        self.lines = lines
         self.headers = Headers()
         self.questions: Question = self.transcribe(self.lines)
 
+    # Main Function that identifies core markup elements (e.g. Questions, Headers, etc.)
     def transcribe(self, lines: list)->list:
         masterList = []
         for i in range(0,len(lines)):
