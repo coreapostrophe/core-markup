@@ -3,7 +3,7 @@ class CoreMarkup:
     # The lines attribute corresponds to every line in the text file
     def __init__(self, lines: list):
         self.lines = lines
-        self.headers = Headers()
+        self.currentHeaders = Headers()
         self.questions: Question = self.transcribe(self.lines)
 
     # Main Function that identifies core markup elements (e.g. Questions, Headers, etc.)
@@ -17,13 +17,12 @@ class CoreMarkup:
                         count += 1
                     else:
                         break
-                for _ in range(count, self.headers.length()):
-                    self.headers.pop()
-                self.headers.add(lines[i][(count+2):])
-                continue
+                for _ in range(count, self.currentHeaders.length()):
+                    self.currentHeaders.pop()
+                self.currentHeaders.add(lines[i][(count+2):])
             elif lines[i][0] in ["*","$"]:
                 question = Question(lines[i][1:])
-                question.setHeaders(self.headers)
+                question.setHeaders(self.currentHeaders)
                 details = []
                 if lines[i][0] == "$":
                     question.isEnumerable(True)
