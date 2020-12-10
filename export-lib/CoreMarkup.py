@@ -1,83 +1,89 @@
 class CoreMarkup:
+    HEADER_CHAR = "#"
+    QUESTION_CHAR = "*"
+    ENM_QUESTION_CHAR = "$"
+    DETAIL_CHAR = "-"
     # CORE MARKUP 2019 「CoreApostrophe」
     # The lines attribute corresponds to every line in the text file
-    def __init__(self, lines: list):
+    def __init__(self):
+        self.lines = []
+        self.current_headers: str = []
+        self.questions: Question = []
+
+    def set_lines(self, lines: list):
         self.lines = lines
-        self.currentHeaders = Headers()
-        self.questions: Question = self.transcribe(self.lines)
+
+    def set_parse_lines(self, lines: list):
+        self.questions = self.transcribe(lines)
+
+    def parse_lines(self):
+        self.questions = self.transcribe(self.lines)
 
     # Main Function that identifies core markup elements (e.g. Questions, Headers, etc.)
     def transcribe(self, lines: list)->list:
-        masterList = []
-        for i in range(0,len(lines)):
-            if lines[i][0] == "#":
-                count = -1
-                for char in lines[i]:
-                    if char == "#":
-                        count += 1
+        master_list = []
+        line_count = 0
+        while(line_count < len(lines)):
+            init_char = lines[line_count][0]
+            if(init_char == self.HEADER_CHAR):
+                h_depth = -1
+                for char in lines[line_count]:
+                    if char == self.HEADER_CHAR:
+                        h_depth += 1
                     else:
                         break
-                for _ in range(count, self.currentHeaders.length()):
-                    self.currentHeaders.pop()
-                self.currentHeaders.add(lines[i][(count+2):])
-            elif lines[i][0] in ["*","$"]:
-                question = Question(lines[i][1:])
-                question.setHeaders(self.currentHeaders)
+                header = lines[line_count][h_depth+1:]
+                for _ in range(h_depth, len(self.current_headers)):
+                    self.current_headers.pop()
+                self.current_headers.append(header)
+            elif init_char in [self.QUESTION_CHAR, self.ENM_QUESTION_CHAR]:
+                question = Question(lines[line_count][1:])
+                question.set_headers(self.current_headers.copy())
+                if init_char == "$":
+                    question.is_enumerable(True)
                 details = []
-                if lines[i][0] == "$":
-                    question.isEnumerable(True)
-                for j in range(i+1, len(lines)):
-                    if lines[j][0] == "-":
-                        details.append(lines[j][1:])
-                    else:
+                line_count += 1
+                while(lines[line_count][0] == "-"):
+                    details.append(lines[line_count][1:])
+                    line_count += 1
+                    if not(line_count < len(lines)):
                         break
-                question.setDetails(self.transcribe(details))
-                masterList.append(question)
-            elif lines[i][0] not in ["","\n","-"]:
-                masterList.append(lines[i])
-        return masterList
+                question.set_details(self.transcribe(details))
+                master_list.append(question)
+            elif init_char not in ["","\n","-"]:
+                master_list.append(lines[line_count])
+            line_count += 1
+        return master_list
 
-    def getQuestions(self):
+    def get_questions(self):
         return self.questions
 
 class Question:
-    def __init__(self, mainConcept : str):
+    def __init__(self, main_concept : str):
         self.enumerable = False
-        self.mainConcept = mainConcept
-        self.headers : Headers
+        self.mainConcept = main_concept
+        self.headers = []
         self.details = []
 
-    def isEnumerable(self, *args):
+    def is_enumerable(self, *args):
         if args != ():
             self.enumerable = args[0]
         return self.enumerable
     
-    def addDetail(self, detail:str):
+    def add_detail(self, detail:str):
         self.details.append(detail)
 
-    def setHeaders(self, header: Headers):
-        self.headers = header
+    def set_headers(self, headers :list):
+        self.headers = headers
 
-    def setDetails(self, details: list):
+    def set_details(self, details: list):
         self.details = details
 
-    def getMainConcept(self):
+    def get_main_concept(self):
         return self.mainConcept
 
-    def getDetails(self)->list:
+    def get_details(self)->list:
         return self.details
 
-class Headers:
-    def __init__(self, *args : str):
-        self.list = []
-        for header in args:
-            self.list.append(header)
-    
-    def add(self, header: str):
-        self.list.append(header)
-    
-    def pop(self):
-        self.list.pop(len(self.list)-1)
-
-    def length(self)->int:
-        return len(self.list)
+    def get_headers(self)->list:
+        return self.headers
