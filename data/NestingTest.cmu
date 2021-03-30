@@ -1,0 +1,13 @@
+$Signed-Complement Representation
+-This system negates a number by taking its complement as defined by the system.
+
+-$Types of Complements
+
+--$Radix-complement
+---General Formula: r's C of N = r^n - N
+
+----$Radix-complement
+-----General Formula: r's C of N = r^n - N
+
+--$Diminished Radix-Complement
+---General Formula: (r-1)'s C of N = (r^n-r^-m) - N
